@@ -47,7 +47,6 @@ function checkWhatsApp(file, renames) {
 	}
 	
 	if(RegExp("^WhatsApp Image \\d\\d\\d\\d-\\d\\d-\\d\\d at \\d\\d\\.\\d\\d\\.\\d\\d.*$").test(basename)) {				
-				//WhatsApp Image 2019-06-29 at 17.33.48
 		const outName = path.join(path.dirname(file),"IMG_"+basename.substr(15,4)+"-"+basename.substr(20,2)+"-"+basename.substr(23,2)+"_"+basename.substr(29,2)+basename.substr(32,2)+basename.substr(35,2)+basename.substr(37))
 		renames.push([file, outName, "W"]);
 	}	
