@@ -24,7 +24,7 @@ WhatsApp Image 2022-01... → IMG_2022-01-23_12-01-02.jpg
 
 - Download the repository
 - Run *npm install*
-- Execute with *node renamer.js <path with photos>
+- Execute with *node renamer.js path_with_photos*
 
 ## Disclamer
 
