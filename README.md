@@ -18,7 +18,7 @@ WhatsApp Image 2022-01... → IMG_2022-01-23_12-01-02.jpg
 
 ## Requirements
 
-Node.js
+[Node.js](https://nodejs.dev/)
 
 ## How to use
 
