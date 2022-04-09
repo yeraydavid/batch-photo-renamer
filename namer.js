@@ -45,6 +45,12 @@ function checkWhatsApp(file, renames) {
 		const outName = path.join(path.dirname(file),"IMG_"+basename.substr(4,4)+"-"+basename.substr(8,2)+"-"+basename.substr(10,2)+basename.substr(12))
 		renames.push([file, outName, "W"]);
 	}
+	
+	if(RegExp("^WhatsApp Image \\d\\d\\d\\d-\\d\\d-\\d\\d at \\d\\d\\.\\d\\d\\.\\d\\d.*$").test(basename)) {				
+				//WhatsApp Image 2019-06-29 at 17.33.48
+		const outName = path.join(path.dirname(file),"IMG_"+basename.substr(15,4)+"-"+basename.substr(20,2)+"-"+basename.substr(23,2)+"_"+basename.substr(29,2)+basename.substr(32,2)+basename.substr(35,2)+basename.substr(37))
+		renames.push([file, outName, "W"]);
+	}	
 }
 
 function readEXIFdata(file) {
@@ -103,22 +109,29 @@ function listRenames(renames) {
 	});
 }
 
+function checkProcessEnd(rensCount, errorsCount) {
+	if(rensCount + errorsCount == renames.length) {
+		console.log("  "+rensCount+" sucessfull renaming operations done with "+errorsCount+" errors");
+	}
+}
+
 function performRenames(renames) {
 	console.log("- Renaming:");
 	let errorsCount = 0;
 	let rensCount = 0;
-	renames.forEach(function(rename) {
+	renames.forEach(function(rename) {		
 		fs.rename(rename[0], rename[1], function(err) {
 			if ( err ) {
 				console.log('  ERROR renaming '+rename[0]+': ' + err);
 				errorsCount++;
+				checkProcessEnd(rensCount, errorsCount);
 			} else {
 				console.log("  "+rename[2]+" "+rename[0]+" → "+rename[1]+" Ok.");		
 				rensCount++;
+				checkProcessEnd(rensCount, errorsCount);
 			}
 		});
-	});
-	console.log("  "+rensCount+" sucessfull renaming operations done with "+errorsCount+" errors");
+	});	
 }
 
 let prompter = prompt();
